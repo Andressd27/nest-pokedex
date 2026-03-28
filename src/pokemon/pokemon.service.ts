@@ -5,6 +5,7 @@ import { Pokemon } from './entities/pokemon.entity';
 
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -27,8 +28,15 @@ export class PokemonService {
     
   }
 
-  findAll() {
-    return `This action returns all pokemon`;
+  findAll( PaginationDto: PaginationDto) {
+
+    const { limit = 10, offset = 0 } = PaginationDto;
+
+    return this.pokemonModel.find()
+    .limit( limit )
+    .skip( offset )
+    .sort({ no: 1 })
+    .select('-__v'); // Excluimos el campo __v de los resultados utilizando el método select del modelo de Pokemon, pasando '-__v' para indicar que queremos excluir ese campo
   }
 
   async findOne(term: string) {
