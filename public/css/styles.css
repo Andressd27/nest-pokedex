@@ -1,0 +1,12 @@
+
+html, body {
+    margin: 0;
+    padding: 20px;
+    font-family: Aral, sans-serif;
+    background-color: grey;
+}
+
+h1 {
+    color: white;
+    font-size: 20px;
+}
